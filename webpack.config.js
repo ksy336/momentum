@@ -3,27 +3,21 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
 
-const devServer = (isDev) =>
-  !isDev
-    ? {}
-    : {
-        devServer: {
-          open: true,
-          port: 8000,
-          contentBase: path.join(__dirname, 'public'),
-        },
-      };
+const devServer = (isDev) => !isDev ? {} : {
+  devServer: {
+    open: true,
+    hot: true,
+    port: 8080,
+    contentBase: path.join(__dirname, 'public'),
+  },
+};
 
-const esLintPlugin = (isDev) =>
-  isDev ? [] : [new ESLintPlugin({ extensions: ['ts', 'js'] })];
-
-module.exports = ({ development }) => ({
-  mode: development ? 'development' : 'production',
-  devtool: development ? 'inline-source-map' : false,
+module.exports = ({ develop }) => ({
+  mode: develop ? 'development' : 'production',
+  devtool: develop ? 'inline-source-map' : false,
   entry: {
-    main: './src/index.ts',
+    main: './src/index.js',
   },
   output: {
     filename: '[name].[contenthash].js',
@@ -33,7 +27,7 @@ module.exports = ({ development }) => ({
   module: {
     rules: [
       {
-        test: /\.[tj]s$/,
+        test: /.(js|ts|jsx|tsx)$/,
         use: 'ts-loader',
         exclude: /node_modules/,
       },
@@ -53,12 +47,16 @@ module.exports = ({ development }) => ({
         test: /\.s[ac]ss$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
+
     ],
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+  },
   plugins: [
-    ...esLintPlugin(development),
-    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
-    new HtmlWebpackPlugin({ template: 'src/index.html' }),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+    }),
     new CopyPlugin({
       patterns: [
         {
@@ -69,9 +67,7 @@ module.exports = ({ development }) => ({
       ],
     }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
   ],
-  resolve: {
-    extensions: ['.ts', '.js'],
-  },
-  ...devServer(development),
+  ...devServer(develop),
 });
