@@ -32,7 +32,7 @@ module.exports = ({ develop }) => ({
         exclude: /node_modules/,
       },
       {
-        test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
+        test: /\.(?:ico|gif|png|jpg|jpeg|svg|json)$/i,
         type: 'asset/resource',
       },
       {
