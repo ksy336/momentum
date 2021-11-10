@@ -44,6 +44,13 @@
                 </div>
               </div>
     </div>
+    <button class="translate__en">
+      english
+    </button>
+    <button class="translate__ru">
+      russian
+    </button>
+    <div id="output"></div>
     <div class="weather">
       <input type="text" class="city" />
       <i class="weather-icon owf"></i>
@@ -67,7 +74,7 @@
     <div class="date"></div>
     <div class="greeting-container">
       <span class="greeting"></span>
-      <input type="text" class="name" />
+      <input type="text" class="name" placeholder="[Enter name]" />
     </div>
   </main>
   <footer class="footer">
@@ -76,7 +83,11 @@
       <div class="quote"></div>
       <div class="author"></div>
     </div>
+    <div class="settings">
+      <img class="set-img" src="./assets/svg/setting.png" width="50px" height="50px" alt="settings">
+    </div>
   </footer>
   <script type="module" src="index.js"></script>
+  <script src="i18next.js"></script>
 </body>
 </html>

@@ -106,9 +106,42 @@ body {
   height: 40px;
   background-size: 40px 40px;
   background-image: url("../svg/play.svg");
+}
+/*.play-item.player {*/
+/*  width: 10px;*/
+/*  height: 10px;*/
+/*  background-image: url("../svg/play.svg");*/
+/*  background-repeat: no-repeat;*/
+/*  background-position: center;*/
+/*  background-size: cover;*/
+/*}*/
 
+.settings {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+.set-img {
+  border-radius: 50px;
+  background-color: transparent;
+  cursor: pointer;
 }
 
+.translate__en,
+.translate__ru {
+  cursor: pointer;
+  width: 70px;
+  padding: 5px;
+  border-radius: 5px;
+}
+.translate__ru:hover,
+.translate__ru:focus,
+.translate__en:hover,
+.translate__en:focus {
+  cursor: pointer;
+  background-color: #00b4a4;
+}
 .pause {
   background-image: url("../svg/pause.svg");
 }
@@ -398,7 +431,7 @@ body {
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  height: 30vh;
+  height: 40vh;
   min-height: 160px;
   padding: 20px;
 }
