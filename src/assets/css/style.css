@@ -11,8 +11,8 @@
 }
 
 body {
-  min-width: 360px;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
   font-family: 'Arial', sans-serif;
   font-size: 16px;
   color: #fff;
@@ -32,6 +32,9 @@ body {
   padding: 20px;
 }
 
+.player__all {
+  display: flex;
+}
 .player-controls {
   display: flex;
   align-items: center;
@@ -67,6 +70,12 @@ body {
   font-weight: 900;
 }
 
+.player-icon.small {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  background-size: 15px;
+}
 .item-active::before {
   color: #C5B358;
 }
@@ -128,17 +137,159 @@ body {
   cursor: pointer;
 }
 
-.translate__en,
-.translate__ru {
+.footer__items {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.popup {
+  display: none;
+  /*background-color: rgb(0, 0, 0.4);*/
+  /*opacity: .7;*/
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  justify-content: center;
+  align-items: center;
+  /*pointer-events: none;*/
+  transition: .5s;
+  height: 100%;
+  width: 100%;
+}
+
+.popup-content {
+  display: none;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 1000px;
+  height: 1000px;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: white;
+  transform: scale(.5);
+  transition: .4s all;
+  z-index: 100;
+  opacity: .9;
+margin: 0 auto;
+}
+@media screen and (max-width: 1200px) {
+  .popup-content {
+    width: 90vw;
+    height: auto;
+  }
+}
+.photo__tag-nature {
+  margin-left: 67px;
+}
+
+.photo__text,
+.tags__text,
+.about-photo__text,
+.span-text,
+.span-text__weather,
+.span-text__player,
+.span-text__quotes,
+.hide__text {
+  color: #444444;
+  z-index: 120;
+  margin-right: 100px;
+
+  font-size: 28px;
+}
+
+.hide__info {
+  margin-top: 60px;
+}
+
+.language {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 50px;
+}
+.photo-res,
+.tags,
+.hide {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.hide {
+  flex-flow: column;
+  overflow-y: hidden;
+}
+.photo-res {
+  margin-bottom: 50px;
+}
+.photo__git,
+.photo__unsplash,
+.photo__flickr,
+.photo__tag-nature,
+.photo__tag-morning,
+.photo__tag-afternoon,
+.photo__tag-evening,
+.photo__tag-night {
   cursor: pointer;
-  width: 70px;
+  width: 120px;
   padding: 5px;
   border-radius: 5px;
+  font-size: 24px;
 }
+
+.photo__tag-nature,
+.photo__tag-morning,
+.photo__tag-afternoon,
+.photo__tag-evening {
+  margin-right: 20px;
+}
+
+.photo__tag-evening {
+  margin-left: 310px;
+}
+
+.photo__tag-evening,
+.photo__tag-night {
+  margin-top: 20px;
+}
+.trans__en {
+/*.trans__ru {*/
+  margin-left: 80px;
+  margin-right: 20px;
+}
+
+.tags {
+  flex-wrap: wrap;
+}
+.translate__en,
+.translate__ru,
+.trans__en,
+.trans__ru {
+  cursor: pointer;
+  width: 85px;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 24px;
+}
+.photo__git,
+.photo__unsplash {
+  margin-right: 20px;
+}
+
 .translate__ru:hover,
+.photo__git:focus,
+.trans__en:focus,
+.trans__ru:focus,
+.photo__unsplash:focus,
+.photo__flickr:focus,
 .translate__ru:focus,
 .translate__en:hover,
-.translate__en:focus {
+.translate__en:focus,
+.photo__tag-nature:focus,
+.photo__tag-morning:focus,
+.photo__tag-afternoon:focus,
+.photo__tag-evening:focus,
+.photo__tag-night:focus {
   cursor: pointer;
   background-color: #00b4a4;
 }
@@ -297,6 +448,12 @@ body {
   left: -123px;
   width: 120px;
 }
+.header,
+.main,
+.footer {
+  min-height: 180px;
+  height: 33vh;
+}
 
 .weather {
   display: flex;
@@ -305,7 +462,7 @@ body {
   align-items: flex-start;
   row-gap: 5px;
   width: 180px;
-  min-height: 170px;
+  min-height: 180px;
   text-align: left;
   border: 2px solid white;
   border-radius: 10px;
@@ -355,9 +512,11 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 40vh;
-  min-height: 260px;
+  /*height: 30vh;*/
+  min-height: 40vh;
   padding: 20px;
+  overflow-y: hidden;
+  margin-top: -50px;
 }
 
 .slider-icon {
@@ -378,17 +537,19 @@ body {
 }
 
 .time {
-  min-height: 124px;
+  min-height: 16vh;
   margin-bottom: 10px;
   font-family: 'Arial-MT';
   font-size: 100px;
   letter-spacing: -4px;
+  overflow-y: hidden;
 }
 
 .date {
   min-height: 28px;
   font-size: 24px;
   margin-bottom: 20px;
+  display: flex;
 }
 
 .greeting-container {
@@ -396,10 +557,11 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  min-height: 48px;
+  min-height: 20vh;
   width: 100vw;
   font-size: 40px;
-  margin-left: 200px;
+  /*  // margin-left: 200px;*/
+  /*}*/
 }
 
 .greeting {
@@ -434,6 +596,7 @@ body {
   height: 40vh;
   min-height: 160px;
   padding: 20px;
+  margin-top: -50px;
 }
 
 .change-quote {
@@ -441,6 +604,9 @@ body {
   background-image: url("../svg/reload.svg");
 }
 
+.quotes__all {
+  display: block;
+}
 .quote {
   min-height: 32px;
   font-style: italic;
@@ -461,14 +627,92 @@ body {
   .greeting-container {
     min-height: 40px;
     font-size: 32px;
+    flex-flow: column;
+    flex-wrap: wrap;
   }
 
   .greeting {
     padding: 5px;
+    flex: 3;
   }
 
   .name {
-    font-size: 32px;
+    font-size: 24px;
     padding: 5px;
+  }
+  .weather,
+  .city {
+    font-size: 10px;
+    width: 36vw;
+  }
+}
+
+
+.switch {
+  position: relative;
+  width: 221px;
+  height: 90px;
+  border-radius: 25px;
+  top: 16px;
+  right: 120px;
+  margin-left: 400px;
+}
+@media (max-width: 600px) {
+  .switch {
+    right: 200px;
+    top: 10px;
+  }
+}
+
+.checkbox:checked ~ .switch-bg {
+  background-color: cadetblue;
+}
+
+.checkbox {
+  visibility: hidden;
+}
+
+.switch-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 50%;
+  background: #C4C4C4;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+}
+
+.checkbox-label:before {
+  position: absolute;
+  content: "";
+  height: 38px;
+  width: 38px;
+  top: 1px;
+  right: 1px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+  display: block;
+  box-sizing: border-box;
+  box-shadow: 0 2px 7px rgb(0 0 0/38%);
+  z-index: 1;
+  cursor: pointer;
+}
+.checkbox:checked ~ .checkbox-label:before {
+  transform: translateX(-48px);
+}
+
+@media screen and(max-width: 500px) {
+ .greeting {
+   font-size: 18px;
+ }
+}
+
+@media screen and(max-width: 768px) {
+  .greeting {
+    font-size: 32px;
+    min-height: 40px;
   }
 }

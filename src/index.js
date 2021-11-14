@@ -3,6 +3,7 @@ import "./localStorage";
 import "./weather";
 import "./assets/myData.json";
 import "./background";
+import "./settings";
 import {
     author,
     body,
@@ -14,9 +15,10 @@ import {
     time,
     translateToEn,
     translateToRus, weatherDescription,
-    weatherIcon, wind, name
+    weatherIcon, wind, name, transEn, transRu, checkbox
 } from "./variables";
 import {getWeather, getWeatherRus} from "./weather";
+import {textToEn, textToRus} from "./settings";
 
 
 export const showTime = () => {
@@ -39,17 +41,27 @@ export function showDateRus() {
     return myDate.textContent = currentDate;
 }
 
+export const settingsText = {
+    ru: ["Язык:", "Фото ресурсы:", "Фото теги:", "Скрыть:"],
+    en: ["Language:", "Photo resources: ", "Photo tags:", "Hide:"],
+}
+
 export const greetingTranslation = {
     ru: ["Добрый вечер, ", "Доброй ночи, ", "Доброе утро, ", "Доброго дня, "],
     en: ["Good evening, ", "Good Night, ", "Good Morning, ", "Good Afternoon, "],
 }
 
+export const switchingText = {
+    ru: ["Дата ", "Погода", "Проигрыватель", "Цитаты"],
+    en: ["Date", "Weather", "Player", "Quotes"],
+}
  export function langRu() {
     changeQuote.addEventListener("click", getQuotesRus);
     showDateRus();
     name.placeholder = "[Введите имя]";
     getGreetingRus();
     getWeatherRus();
+    textToRus();
 }
 
 export function langEn() {
@@ -59,6 +71,7 @@ export function langEn() {
     name.placeholder = "[Enter name]";
     getGreeting();
     getWeather();
+    textToEn();
 }
 
 export function getGreeting() {
@@ -102,7 +115,7 @@ export function getTimeOfDay() {
     }
 }
 
-async function getQuotes() {
+export async function getQuotes() {
     try {
         const quotes = "./assets/myData.json";
         const res = await fetch(quotes);
@@ -118,7 +131,7 @@ async function getQuotes() {
 }
 getQuotes();
 
-async function getQuotesRus() {
+export async function getQuotesRus() {
     try {
         const quotes = "./assets/myRussianQuotes.json";
         const res = await fetch(quotes);
@@ -132,11 +145,12 @@ async function getQuotesRus() {
         }
     }
 }
-
 translateToEn.addEventListener("click", langEn);
 translateToRus.addEventListener("click", langRu);
+transEn.addEventListener("click", langEn);
+transRu.addEventListener("click", langRu);
 translateToRus.addEventListener("click", getQuotesRus);
-translateToEn.addEventListener("click", getQuotes);
+transRu.addEventListener("click", getQuotesRus);
 document.addEventListener('DOMContentLoaded', showTime);
 document.addEventListener('DOMContentLoaded', getGreeting);
 document.addEventListener('DOMContentLoaded', getQuotes);

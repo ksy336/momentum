@@ -10,10 +10,35 @@ import {
     timeLine,
     volumeSlider
 } from "./variables";
+import {URLSearchParams as playItem} from "url";
 
 const audio = new Audio();
 audio.src = playList[playNum].src;
 
+for (let i = 0; i < playList.length; i++) {
+    //playAudio();
+    let li = document.createElement("li");
+    // const classesToAdd = ['play-item', 'player'];
+    // classesToAdd.forEach((ele) => {
+    li.classList.add('play-item');
+    //})
+    li.textContent = `${playList[i].title}`;
+    playListContainer.append(li);
+}
+
+const liList = Array.from(document.querySelectorAll("li"));
+
+for (let i = 0; i < liList.length; i++) {
+    console.log(liList.length);
+    let button = document.createElement("button");
+    const classesToAdd = ["play", "player-icon", "small"];
+    classesToAdd.forEach((el) => {
+        button.classList.add(el);
+    })
+    liList[i].prepend(button);
+}
+const buttonList = Array.from(document.querySelectorAll(".play-list button"));
+console.log(buttonList);
 audio.addEventListener("loadeddata", () => {
         document.querySelector(".length")
             .textContent = getTimeCodeFromNum(audio.duration);
@@ -84,12 +109,17 @@ function playAudio() {
         console.log(audio.src);
         audio.currentTime = 0;
         audio.play();
+        audio.addEventListener("ended", getPlayNext);
+        buttonList[playNum].classList.add("pause");
+        console.log(buttonList[playNum]);
     } else {
-        isPlay = false
+        isPlay = false;
+        buttonList.forEach(el => el.classList.remove("pause"));
         audio.pause();
     }
 }
 
+console.log(buttonList)
 function toggleBtn() {
     if(isPlay === true) {
         isPlay = true;
@@ -129,18 +159,37 @@ function getPlayNext() {
     playAudio();
 }
 
-for (let i = 0; i < playList.length; i++) {
-    playAudio();
-    let li = document.createElement("li");
-    // const classesToAdd = ['play-item', 'player'];
-    // classesToAdd.forEach((ele) => {
-        li.classList.add('play-item');
-    //})
-    li.textContent = `${playList[i].title}`;
-    playListContainer.append(li);
-}
-let liList = Array.from(document.querySelectorAll("li"));
-console.log(liList);
+// for (let i = 0; i < buttonList.length; i++) {
+//     buttonList[i].addEventListener("click", () => {
+//         if(audio.paused) {
+//             buttonList[i].classList.add("pause");
+//             buttonList[i].classList.remove("play");
+//             changeClass();
+//         } else {
+//             buttonList[i].classList.add("play");
+//             buttonList[i].classList.remove("pause");
+//             audio.pause();
+//         }
+//         changeClass();
+//     }, false);
+// }
+
+
+buttonList.forEach((el, index) => {
+    el.addEventListener("click", () => {
+        if(playNum !== index) {
+            audio.pause();
+            playNum = index;
+            playAudio();
+            //audio.play();
+            changeClass();
+        } else {
+            audio.pause();
+        }
+        playAudio();
+        changeClass();
+    }, false);
+})
 
 function changeClass() {
     liList[playNum].classList.add("active");

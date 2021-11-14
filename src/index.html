@@ -11,44 +11,47 @@
 </head>
 <body>
   <header class="header">
-    <div class="player">
-      <div class="player-controls">
-        <div class="play-prev player-icon"></div>
-        <button class="play player-icon"></button>
-        <div class="play-next player-icon"></div>
+    <div class="player__all">
+      <div class="player">
+        <div class="player-controls">
+          <div class="play-prev player-icon"></div>
+          <button class="play player-icon"></button>
+          <div class="play-next player-icon"></div>
+        </div>
+        <ul class="play-list"></ul>
       </div>
-      <ul class="play-list"></ul>
-    </div>
-    <div class="audio-player">
-      <div class="timeline">
-        <div class="progress"></div>
+      <div class="audio-player">
+        <div class="timeline">
+          <div class="progress"></div>
+        </div>
+        <div class="controls">
+          <div class="play-container">
+            <div class="toggle-play player">
+            </div>
+          </div>
+          <div class="playerTime">
+            <div class="current">0:00</div>
+            <div class="divider">/</div>
+            <div class="length"></div>
+          </div>
+          <div class="musicName">Music Song</div>
+          <div class="volume-container">
+            <div class="volume-button">
+              <div class="volume icono-volumeMedium"></div>
+            </div>
+            <div class="volume-slider">
+              <div class="volume-percentage"></div>
+            </div>
+          </div>
+        </div>
       </div>
-              <div class="controls">
-                <div class="play-container">
-                  <div class="toggle-play player">
-                  </div>
-                </div>
-                <div class="playerTime">
-                  <div class="current">0:00</div>
-                  <div class="divider">/</div>
-                  <div class="length"></div>
-                </div>
-                <div class="musicName">Music Song</div>
-                <div class="volume-container">
-                  <div class="volume-button">
-                    <div class="volume icono-volumeMedium"></div>
-                  </div>
-                  <div class="volume-slider">
-                    <div class="volume-percentage"></div>
-                  </div>
-                </div>
-              </div>
     </div>
+
     <button class="translate__en">
-      english
+      eng
     </button>
     <button class="translate__ru">
-      russian
+      rus
     </button>
     <div id="output"></div>
     <div class="weather">
@@ -78,15 +81,96 @@
     </div>
   </main>
   <footer class="footer">
-    <button class="change-quote"></button>
-    <div>
-      <div class="quote"></div>
-      <div class="author"></div>
+    <div class="quotes__all">
+      <button class="change-quote"></button>
+      <div>
+        <div class="quote"></div>
+        <div class="author"></div>
+      </div>
     </div>
     <div class="settings">
       <img class="set-img" src="./assets/svg/setting.png" width="50px" height="50px" alt="settings">
     </div>
   </footer>
+  <div class="popup">
+    <div class="popup-content">
+      <div class="language">
+        <div class="tags__text">Language:</div>
+        <button class="trans__en">
+          eng
+        </button>
+        <button class="trans__ru">
+          rus
+        </button>
+      </div>
+      <div class="photo-res">
+        <div class="photo__text">Photo resources:</div>
+        <button class="photo__git">
+         Github
+        </button>
+        <button class="photo__unsplash">
+          Unsplash
+        </button>
+        <button class="photo__flickr">
+          Flickr
+        </button>
+      </div>
+      <div class="tags">
+        <div class="about-photo__text">Photo tags:</div>
+        <button class="photo__tag-nature">
+          Nature
+        </button>
+        <button class="photo__tag-morning">
+          Morning
+        </button>
+        <button class="photo__tag-afternoon">
+          Afternoon
+        </button>
+        <button class="photo__tag-evening">
+          Evening
+        </button>
+        <button class="photo__tag-night">
+          Night
+        </button>
+      </div>
+      <div class="hide">
+        <div class="hide__text">Hide:</div>
+        <div class="switch">
+          <label>
+            <input type="checkbox" class="checkbox" id="checkbox" value="checkbox">
+            <label for="checkbox" class="checkbox-label"></label>
+            <span class="switch-bg"></span>
+            <span class="span-text">Date</span>
+          </label>
+        </div>
+
+          <div class="switch">
+            <label>
+              <input type="checkbox" class="checkbox" id="checkbox-weather" value="checkbox-weather">
+              <label for="checkbox-weather" class="checkbox-label"></label>
+              <span class="switch-bg"></span>
+              <span class="span-text__weather">Weather</span>
+            </label>
+        </div>
+        <div class="switch">
+          <label>
+            <input type="checkbox" class="checkbox" id="checkbox-player" value="checkbox-weather">
+            <label for="checkbox-player" class="checkbox-label"></label>
+            <span class="switch-bg"></span>
+            <span class="span-text__player">Player</span>
+          </label>
+        </div>
+        <div class="switch">
+          <label>
+            <input type="checkbox" class="checkbox" id="checkbox-quotes" value="checkbox-weather">
+            <label for="checkbox-quotes" class="checkbox-label"></label>
+            <span class="switch-bg"></span>
+            <span class="span-text__quotes">Quotes</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
   <script type="module" src="index.js"></script>
   <script src="i18next.js"></script>
 </body>
